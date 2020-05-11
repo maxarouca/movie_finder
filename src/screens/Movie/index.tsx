@@ -42,7 +42,7 @@ const Movie: React.FC = () => {
         try {
             setLoading(true);
             const res = await axios.get(
-                `https://api.themoviedsb.org/3/movie/${id}?api_key=ded9b46c945a4dd86b8a6d4cd80dfde3&language=pt-BR`,
+                `https://api.themoviedb.org/3/movie/${id}?api_key=ded9b46c945a4dd86b8a6d4cd80dfde3&language=pt-BR&append_to_response=videos`,
             );
             setMovie(res.data);
             setLoading(false);
