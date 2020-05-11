@@ -124,7 +124,7 @@ const Movie: React.FC = () => {
                                 <div style={{ width: '100%' }}>
                                     <YouTube
                                         videoId={trailer.key}
-                                        opts={{ width: trailer.size.toString(), height: '720' }}
+                                        opts={{ width: '1920', height: '1080' }}
                                         className="youtubeVideo"
                                     />
                                 </div>
