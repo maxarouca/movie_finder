@@ -7,6 +7,11 @@ export const Container = styled.div`
     align-items: center;
     flex: 1;
     padding-top: 45px;
+    padding-bottom: 45px;
+
+    .youtubeVideo {
+        width: 100%;
+    }
 `;
 
 export const TitleContainer = styled.div`

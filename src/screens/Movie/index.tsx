@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Container, TitleContainer } from './styles';
 import Loader from 'components/Loader';
 import { format } from 'date-fns';
+import YouTube from 'react-youtube';
 
 interface Movie {
     id: number;
@@ -25,11 +26,32 @@ interface Movie {
     revenue: number;
     runtime: number;
     genres: [Genre];
+    videos: Movies;
 }
 
 interface Genre {
     id: number;
     name: string;
+}
+
+interface Movies {
+    results: [Video];
+}
+
+interface Video {
+    key: string;
+    size: number;
+    // "iso_639_1": "pt",
+    // "iso_3166_1": "BR",
+    // "key": "l-q4_usveec",
+    // "name": "Trailer legendado",
+    // "site": "YouTube",
+    // "size": 1080,
+    // "type": "Trailer"
+}
+
+interface OPTS {
+    width: string;
 }
 
 const Movie: React.FC = () => {
@@ -56,6 +78,24 @@ const Movie: React.FC = () => {
         loadMovies();
     }, []);
 
+    const trailer = movie ? movie.videos.results[0] : null;
+
+    // const opts = movie
+    //     ? {
+    //         width: trailer.size.toString(),
+    //           // width: '640',
+    //           // playerVars: {
+    //           //     // https://developers.google.com/youtube/player_parameters
+    //           //     autoplay: 1,
+    //           // },
+    //       }
+    //     : {};
+
+    // function _onReady(event: ) {
+    //     // access to player in all event handlers via event.target
+    //     event.target.pauseVideo();
+    // }
+
     return (
         <>
             <Header title="Movies"></Header>
@@ -80,6 +120,15 @@ const Movie: React.FC = () => {
                                 score={movie.vote_average}
                                 image={movie.poster_path}
                             />
+                            {trailer && (
+                                <div style={{ width: '100%' }}>
+                                    <YouTube
+                                        videoId={trailer.key}
+                                        opts={{ width: trailer.size.toString(), height: '720' }}
+                                        className="youtubeVideo"
+                                    />
+                                </div>
+                            )}
                         </>
                     )
                 ) : (
